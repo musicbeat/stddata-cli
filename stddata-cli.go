@@ -1,6 +1,15 @@
 package main
 
-import "os"
+import (
+	"log"
+	"os"
+
+	"github.com/musicbeat/stddata"
+	"github.com/musicbeat/stddata/bank"
+	"github.com/musicbeat/stddata/country"
+	"github.com/musicbeat/stddata/currency"
+	"github.com/musicbeat/stddata/language"
+)
 
 func main() {
 	// os.Exit will terminate the program at the place of call without running
@@ -14,32 +23,33 @@ func main() {
 
 // Run the program and return exit code.
 func run() int {
-	// TODO: this would be the right place to load a config file. The config
-	// file could specify which stddata providers to load. So far, there's
-	// not much else to configure.
-	// TODO: what's with the flags variable?
-	flags, err := config()
-	if err != nil {
-		errf("config error: %v\n", err)
+	bankService := new(stddata.Service)
+	if err := bankService.LoadProvider(new(bank.BankProvider), "bank"); err != nil {
+		log.Printf("Error loading BankProvider: %v\n", err)
 		return 1
 	}
+	log.Printf("Serving %d bank entities at /%s\n", bankService.Count, bankService.EntityName)
 
-	switch cmd := flags.Arg(0); cmd {
-	case "launch":
-		return cmdLaunch()
-	case "stop":
-		return cmdStop()
-	case "reload":
-		return cmdReload()
-	case "help":
-		flags.Usage()
-		return 0
-	case "":
-		usageShort()
-		return 0
-	default:
-		errf("Unknown command %q\n", cmd)
-		usageShort()
+	countryService := new(stddata.Service)
+	if err := countryService.LoadProvider(new(country.CountryProvider), "country"); err != nil {
+		log.Printf("Error loading CountryProvider: %v\n", err)
+		return 2
+	}
+	log.Printf("Serving %d country entities at /%s\n", countryService.Count, countryService.EntityName)
+
+	currencyService := new(stddata.Service)
+	if err := currencyService.LoadProvider(new(currency.CurrencyProvider), "currency"); err != nil {
+		log.Printf("Error loading CurrencyProvider: %v\n", err)
 		return 1
 	}
+	log.Printf("Serving %d currency entities at /%s\n", currencyService.Count, currencyService.EntityName)
+
+	languageService := new(stddata.Service)
+	if err := languageService.LoadProvider(new(language.LanguageProvider), "language"); err != nil {
+		log.Printf("Error loading LanguageProvider: %v\n", err)
+		return 1
+	}
+	log.Printf("Serving %d language entities at /%s\n", languageService.Count, languageService.EntityName)
+
+	return 0
 }
