@@ -2,6 +2,37 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+/*
+Package main implements the command line interface used to load and 
+serve the data set providers. The server will listen on port 6060.
+
+So far, no options or config file. But a future version may have
+these.
+
+Install golang for your development architecture (see golang.org).
+
+Usage:
+	go get github.com/musicbeat/stddata
+	go get github.com/musicbeat/stddata-cli
+	go install
+	$GOPATH/bin/stddata-cli
+
+Use an http client, say curl, to interact with the server:
+	curl -v http://localhost:6060/bank?name=X
+	curl -v http://localhost:6060/bank?number=271972899
+	curl -v http://localhost:6060/country?name=argentina
+	curl -v http://localhost:6060/country?alpha2=AR
+	curl -v http://localhost:6060/country?alpha3=USA
+	curl -v http://localhost:6060/country?number=800
+	curl -v http://localhost:6060/currency?name=Euro
+	curl -v http://localhost:6060/currency?code=USD
+	curl -v http://localhost:6060/currency?number=840
+	curl -v http://localhost:6060/language?name=Eng
+	curl -v http://localhost:6060/language?alpha=fr
+	curl -v http://localhost:6060/language?alpha=_dump
+	... et cetera ...
+
+*/
 package main
 
 import (
