@@ -1,3 +1,3 @@
 FROM scratch
-ADD bin/helloworld /helloworld
+ADD bin/stddata-cli /stddata-cli
 CMD ["/stddata-cli"]
