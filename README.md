@@ -1,6 +1,6 @@
 # [stddata-cli](https://github.com/musicbeat/stddata-cli)
 
-The [stddata-cli](https://github.com/musicbeat/stddata-cli) is the command line "main" package for a set of standard data providers. An [stddata](https://github.com/musicbeat/stddata) data provider loads data from a standards provider, indexes it, and serves it over HTTP with REST interface, delivering json results to the client.
+The [stddata-cli](https://github.com/musicbeat/stddata-cli) is the command line "main" package for a set of standard data providers implemented in [golang](https://golang.org). A [stddata](https://github.com/musicbeat/stddata) data provider loads data from a standards provider, indexes it, and serves it over HTTP with REST interface, delivering json results to the client.
 
 There are currently data providers for:
 
