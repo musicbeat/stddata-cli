@@ -29,6 +29,7 @@ Use an http client, say curl, to interact with the server. Request URLs are in t
     http://server:port/entity?index=query
 ```
 Here are the currently included entities and their indexes:
+```
   Entity      | Indexes | Notes
   --------- | ----- | --------
   bank  | number | ACH - ABA Routing number
@@ -43,6 +44,7 @@ Here are the currently included entities and their indexes:
   currency | number | Currency code (numeric)
   language | alpha | Alpha code
   language | name | English name
+```
 
 ### Examples
 ```
